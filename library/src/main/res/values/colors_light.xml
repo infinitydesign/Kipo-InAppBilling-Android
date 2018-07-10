@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="windowBackground">#ececec</color>
+    <color name="drawerBackground">#ffffff</color>
+    <color name="drawerSelected">#eeeeee</color>
+    <color name="cardBackground">#ffffff</color>
+
+    <color name="textPrimary_default">#de000000</color>
+    <color name="textEnable_default">#ab000000</color>
+    <color name="textSecondary_default">#8a000000</color>
+    <color name="textHint_default">#61000000</color>
+    <color name="xDivider_default">#42000000</color>
+    <color name="divider_default">#1f000000</color>
+    <color name="lDivider_default">#15000000</color>
+
+    <color name="textPrimary_inverse">#ffffff</color>
+    <color name="textEnable_inverse">#daffffff</color>
+    <color name="textSecondary_inverse">#b2ffffff</color>
+    <color name="textHint_inverse">#7fffffff</color>
+    <color name="xDivider_inverse">#42ffffff</color>
+    <color name="divider_inverse">#1fffffff</color>
+    <color name="lDivider_inverse">#15ffffff</color>
+
+    <color name="textPrimary_noAlpha_default">#212121</color>
+    <color name="textEnable_noAlpha_default">#545454</color>
+    <color name="textSecondary_noAlpha_default">#757575</color>
+    <color name="textHint_noAlpha_default">#9e9e9e</color>
+    <color name="xDivider_noAlpha_default">#bdbdbd</color>
+    <color name="divider_noAlpha_default">#e0e0e0</color>
+    <color name="lDivider_noAlpha_default">#ebebeb</color>
+
+    <color name="textPrimary_noAlpha_inverse">#ffffff</color>
+    <color name="textEnable_noAlpha_inverse">#dadada</color>
+    <color name="textSecondary_noAlpha_inverse">#b3b3b3</color>
+    <color name="textHint_noAlpha_inverse">#808080</color>
+    <color name="xDivider_noAlpha_inverse">#424242</color>
+    <color name="divider_noAlpha_inverse">#1f1f1f</color>
+    <color name="lDivider_noAlpha_inverse">#141414</color>
+
+    <color name="control_default">#42000000</color>
+    <color name="control_no_alpha_default">#ababab</color>
+    <color name="control_inverse">#54ffffff</color>
+    <color name="control_no_alpha_inverse">#838383</color>
+    <color name="control_card">#64000000</color>
+
+    <color name="toast">#dd212121</color>
+    <color name="errorImage">#8a000000</color>
+    <color name="errorText">#8a000000</color>
+
+    <color name="telcheckbox_shape">#33000000</color>
+
+    <color name="pressed_drawerBackground">#e0e0e0</color>
+    <color name="pressed_cardBackground">#bdbdbd</color>
+
+
+</resources>

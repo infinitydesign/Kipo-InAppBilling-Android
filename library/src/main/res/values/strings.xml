@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">library</string>
+    <string name="error_unknown">مشکلی در پرداخت به وجود آمد.</string>
+    <string name="errorCode">کد خطا : %d</string>
 </resources>

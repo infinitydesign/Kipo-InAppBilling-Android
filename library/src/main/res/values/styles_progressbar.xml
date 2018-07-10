@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="HEProgressBar" parent="Widget.MaterialProgressBar.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:indeterminate">true</item>
+        <item name="mpb_progressBackgroundTint">@color/transparent</item>
+        <item name="mpb_progressStyle">circular</item>
+    </style>
+
+    <style name="HEProgressBar_horizontal" parent="Widget.MaterialProgressBar.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="mpb_progressBackgroundTint">@color/transparent</item>
+        <item name="mpb_progressStyle">horizontal</item>
+        <item name="mpb_progressTint">@color/progress_primary</item>
+        <item name="mpb_indeterminateTint">@color/progress_primary</item>
+    </style>
+
+    <style name="HEProgressBar.normal">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:maxWidth">48dp</item>
+        <item name="android:maxHeight">48dp</item>
+    </style>
+
+    <style name="HEProgressBar.small">
+        <item name="android:minWidth">36dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:maxWidth">36dp</item>
+        <item name="android:maxHeight">36dp</item>
+    </style>
+
+    <style name="HEProgressBar.normal.primary">
+        <item name="mpb_progressTint">@color/progress_primary</item>
+        <item name="mpb_indeterminateTint">@color/progress_primary</item>
+    </style>
+
+    <style name="HEProgressBar.normal.secondary">
+        <item name="mpb_progressTint">@color/progress_secondary</item>
+        <item name="mpb_indeterminateTint">@color/progress_secondary</item>
+    </style>
+
+    <style name="HEProgressBar.normal.white">
+        <item name="mpb_progressTint">@color/white</item>
+        <item name="mpb_indeterminateTint">@color/white</item>
+    </style>
+
+    <style name="HEProgressBar.small.primary">
+        <item name="mpb_progressTint">@color/progress_primary</item>
+        <item name="mpb_indeterminateTint">@color/progress_primary</item>
+    </style>
+
+    <style name="HEProgressBar.small.secondary">
+        <item name="mpb_progressTint">@color/progress_secondary</item>
+        <item name="mpb_indeterminateTint">@color/progress_secondary</item>
+    </style>
+
+    <style name="HEProgressBar.small.white">
+        <item name="mpb_progressTint">@color/white</item>
+        <item name="mpb_indeterminateTint">@color/white</item>
+    </style>
+
+</resources>
