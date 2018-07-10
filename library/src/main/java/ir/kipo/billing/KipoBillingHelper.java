@@ -79,6 +79,9 @@ public class KipoBillingHelper {
     }
 
     public static void init(Context context, String merchantId) {
+        if (!StringHelper.isValidMobile(merchantId)) {
+            throw new IllegalArgumentException("merchant id is invalid. (example : 09123456789)");
+        }
         SPHelper.setString(context, SPHelper.SETTING, SPHelper.KEY_MERCHANT_ID, merchantId);
         SPHelper.setString(context, SPHelper.SETTING, SPHelper.KEY_MERCHANT_SCHEMA, context.getPackageName());
     }

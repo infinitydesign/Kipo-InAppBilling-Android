@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,22 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/white"
-        android:gravity="center_horizontal"
-        android:elevation="8dp"
-        android:orientation="horizontal">
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UnusedAttribute">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:gravity="center_vertical"
             android:background="@drawable/shape_billing_url"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ir.kipo.billing.views.HEImageView
@@ -32,9 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 app:he_imageview_color="@color/green"
                 app:he_imageview_size="20dp"
                 app:he_imageview_vector="@drawable/ic_lock_outline" />
@@ -42,22 +44,42 @@
             <ir.kipo.billing.views.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextView.normal"
-                android:textColor="@color/green"
                 android:paddingTop="2dp"
                 android:text="https://"
-                app:fontName="@string/font_mainRegular" />
+                android:textAppearance="@style/TextView.normal"
+                android:textColor="@color/green"
+                app:fontName="@string/font_mainRegular"
+                tools:ignore="HardcodedText" />
 
-            <ir.kipo.billing.views.MyTextView
-                android:id="@+id/MyTextView_billing_url"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="2dp"
-                android:textAppearance="@style/TextView.normal"
-                android:textColor="@color/textPrimary_default"
-                app:fontName="@string/font_mainRegular" />
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:background="@color/transparent"
+                android:scrollbars="none">
+
+                <ir.kipo.billing.views.MyTextView
+                    android:id="@+id/MyTextView_billing_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:paddingTop="2dp"
+                    android:textAppearance="@style/TextView.normal"
+                    android:textColor="@color/textPrimary_default"
+                    app:fontName="@string/font_mainRegular" />
+
+            </HorizontalScrollView>
 
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_logo"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

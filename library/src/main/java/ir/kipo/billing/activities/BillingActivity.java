@@ -7,17 +7,21 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.net.URI;
 
 import ir.kipo.billing.KipoBillingHelper;
 import ir.kipo.billing.R;
+import ir.kipo.billing.tools.LogHelper;
 import ir.kipo.billing.tools.SPHelper;
 import ir.kipo.billing.tools.StringHelper;
 import ir.kipo.billing.views.HEProgressBar;
 import ir.kipo.billing.views.MyTextView;
 
 public class BillingActivity extends AppCompatActivity {
+
+    private static final String TAG = BillingActivity.class.getSimpleName();
 
     public static final String KEY_AMOUNT = "amount";
     private long amount;
@@ -45,8 +49,15 @@ public class BillingActivity extends AppCompatActivity {
         } else {
             finish();
         }
-        //todo error check for amount > 0;
-        //todo error check for mobile is correct;
+
+        if (amount <= 0) {
+            Toast.makeText(this, R.string.error_needAmount, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        long invoiceId = SPHelper.getLong(this, SPHelper.SETTING, SPHelper.KEY_LAST_INVOICE_ID, SPHelper.DEFAULT_INVOICE_ID);
+        invoiceId++;
 
         setContentView(R.layout.activity_billing);
 
@@ -59,6 +70,7 @@ public class BillingActivity extends AppCompatActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                LogHelper.d(TAG, "url : " + url);
                 URI uri = null;
                 try {
                     uri = new URI(url);
@@ -83,7 +95,7 @@ public class BillingActivity extends AppCompatActivity {
                                     finishActivity(KipoBillingHelper.CODE_SUCCESS, tokenValue, 103);
 
                             } else if (array[1].equals("error")) {
-                                String message = array[1];
+                                String message = array[2];
                                 finishActivity(KipoBillingHelper.CODE_FAILED, message, 0);
                             } else {
                                 finishActivity(KipoBillingHelper.CODE_FAILED, "", 105);

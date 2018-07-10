@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="myPrimaryColor">#E91E63</color>
-    <color name="myDarkPrimaryColor">#C2185B</color>
-    <color name="mySecondaryColor">#3F51B5</color>
+    <color name="myPrimaryColor">#3333cc</color>
+    <color name="myDarkPrimaryColor">#1f1fc7</color>
+    <color name="mySecondaryColor">#6dc9d6</color>
     <color name="myActiveColor">@color/myPrimaryColor</color>
 
     <color name="drawerTextSelected">@color/mySecondaryColor</color>
@@ -22,7 +22,7 @@
     <color name="control_dark">#42000000</color>
     <color name="control_xlight">#75ffffff</color>
     <color name="control_xdark">#64000000</color>
-    <color name="control_primary">#42E91E63</color>
+    <color name="control_primary">#423333cc</color>
 
     <color name="cardStroke">@color/divider_noAlpha_default</color>
     <color name="buttonStrokeBG">@color/windowBackground</color>
@@ -44,8 +44,8 @@
     <color name="button_text_black">#ffffff</color>
     <color name="button_text_card">@color/textPrimary_default</color>
 
-    <color name="pressed_myPrimaryColor">#C2185B</color>
-    <color name="pressed_mySecondaryColor">#303F9F</color>
+    <color name="pressed_myPrimaryColor">#1f1fc7</color>
+    <color name="pressed_mySecondaryColor">#2092a2</color>
     <color name="pressed_white">#bdbdbd</color>
     <color name="pressed_transparent">#42000000</color>
 
