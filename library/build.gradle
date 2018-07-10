@@ -9,7 +9,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -31,4 +31,42 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
+
+def libraryGroupId = 'ir.kipo'
+def libraryArtifactId = 'inAppBilling'
+def libraryVersion = '0.0.1'
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId libraryGroupId
+            version libraryVersion
+            artifactId libraryArtifactId
+
+            artifact("$buildDir/outputs/aar/library-release.aar")
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'http://136.243.116.229:8081/artifactory'
+    publish {
+        repository {
+            repoKey = 'kipo_repo'
+
+            username = artifactory_username
+            password = artifactory_password
+        }
+        defaults {
+            publications('aar')
+            publishArtifacts = true
+
+            properties = ['qa.level': 'basic', 'q.os': 'android', 'dev.team': 'core']
+            publishPom = true
+        }
+    }
 }
