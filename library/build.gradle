@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 def libraryGroupId = 'ir.kipo'
 def libraryArtifactId = 'inAppBilling'
-def libraryVersion = '0.0.2'
+def libraryVersion = '0.1.0'
 
 android {
     compileSdkVersion 27
@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 27
-        versionCode 2
+        versionCode 4
         versionName libraryVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
