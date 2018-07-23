@@ -8,27 +8,27 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import ir.kipo.billing.R;
-import ir.kipo.billing.tools.DisplayHelper;
-import ir.kipo.billing.tools.DrawableHelper;
+import ir.kipo.billing.tools.KipoDisplayHelper;
+import ir.kipo.billing.tools.KipoDrawableHelper;
 
 /**
  * Created by 1HE on 10/22/2017.
  */
 
 @SuppressWarnings({"unused", "DefaultFileTemplate"})
-public class HEImageView extends AppCompatImageView {
+public class KipoHEImageView extends AppCompatImageView {
 
     private int resVector;
     private int color;
     private int size;
 
-    public HEImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KipoHEImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setAttributeFromXml(context, attrs);
         initializeViews();
     }
 
-    public HEImageView(Context context, AttributeSet attrs) {
+    public KipoHEImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setAttributeFromXml(context, attrs);
         initializeViews();
@@ -38,12 +38,12 @@ public class HEImageView extends AppCompatImageView {
         if (attrs == null) {
             return;
         }
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.HEImageView, 0, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.KipoHEImageView, 0, 0);
 
         try {
-            resVector = a.getResourceId(R.styleable.HEImageView_he_imageview_vector, 0);
-            color = a.getColor(R.styleable.HEImageView_he_imageview_color, 0);
-            size = a.getDimensionPixelSize(R.styleable.HEImageView_he_imageview_size, DisplayHelper.i(24));
+            resVector = a.getResourceId(R.styleable.KipoHEImageView_he_imageview_vector, 0);
+            color = a.getColor(R.styleable.KipoHEImageView_he_imageview_color, 0);
+            size = a.getDimensionPixelSize(R.styleable.KipoHEImageView_he_imageview_size, KipoDisplayHelper.i(24));
         } finally {
             a.recycle();
         }
@@ -53,7 +53,7 @@ public class HEImageView extends AppCompatImageView {
         if (resVector == 0)
             return;
 
-        setImageDrawable(DrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
+        setImageDrawable(KipoDrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
     }
 
     public void setVector(Item item) {
@@ -65,17 +65,17 @@ public class HEImageView extends AppCompatImageView {
         this.resVector = item.getResVector();
         this.color = item.getColor();
 
-        setImageDrawable(DrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
+        setImageDrawable(KipoDrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
     }
 
     public void setColor(int color) {
         this.color = color;
-        setImageDrawable(DrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
+        setImageDrawable(KipoDrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
     }
 
     public void setResVector(int resVector) {
         this.resVector = resVector;
-        setImageDrawable(DrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
+        setImageDrawable(KipoDrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
     }
 
     public void setSize(int size) {
@@ -98,7 +98,7 @@ public class HEImageView extends AppCompatImageView {
             if (a != null)
                 a.start();
         } else {
-            setImageDrawable(DrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
+            setImageDrawable(KipoDrawableHelper.changeColorDrawableVector(getContext(), resVector, color));
         }
     }
 

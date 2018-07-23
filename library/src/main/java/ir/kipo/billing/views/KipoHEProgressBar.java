@@ -11,9 +11,9 @@ import ir.kipo.billing.libraries.materialprogressbar.MaterialProgressBar;
  */
 
 @SuppressWarnings("DefaultFileTemplate")
-public class HEProgressBar extends MaterialProgressBar {
+public class KipoHEProgressBar extends MaterialProgressBar {
 
-    public HEProgressBar(Context context, AttributeSet attrs) {
+    public KipoHEProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         setAttributeFromXml(context, attrs);
         initializeViews();

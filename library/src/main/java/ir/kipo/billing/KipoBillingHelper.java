@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import ir.kipo.billing.activities.BillingActivity;
-import ir.kipo.billing.tools.SPHelper;
-import ir.kipo.billing.tools.StringHelper;
+import ir.kipo.billing.activities.KipoBillingActivity;
+import ir.kipo.billing.tools.KipoSPHelper;
+import ir.kipo.billing.tools.KipoStringHelper;
 
 public class KipoBillingHelper {
 
@@ -39,8 +39,8 @@ public class KipoBillingHelper {
     }
 
     public void purchase(long amount) {
-        Intent intent = new Intent(activity, BillingActivity.class);
-        intent.putExtra(BillingActivity.KEY_AMOUNT, amount);
+        Intent intent = new Intent(activity, KipoBillingActivity.class);
+        intent.putExtra(KipoBillingActivity.KEY_AMOUNT, amount);
         activity.startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -66,7 +66,7 @@ public class KipoBillingHelper {
         }
 
         if (code == CODE_FAILED) {
-            String m = StringHelper.isEmpty(message) ? defaultMessage : message;
+            String m = KipoStringHelper.isEmpty(message) ? defaultMessage : message;
             if (errorCode != 0)
                 m += " " + String.format(activity.getString(R.string.errorCode), errorCode);
             listener.onBillingFailed(m);
@@ -79,11 +79,11 @@ public class KipoBillingHelper {
     }
 
     public static void init(Context context, String merchantId) {
-        if (!StringHelper.isValidMobile(merchantId)) {
+        if (!KipoStringHelper.isValidMobile(merchantId)) {
             throw new IllegalArgumentException("merchant id is invalid. (example : 09123456789)");
         }
-        SPHelper.setString(context, SPHelper.SETTING, SPHelper.KEY_MERCHANT_ID, merchantId);
-        SPHelper.setString(context, SPHelper.SETTING, SPHelper.KEY_MERCHANT_SCHEMA, context.getPackageName());
+        KipoSPHelper.setString(context, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_ID, merchantId);
+        KipoSPHelper.setString(context, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_SCHEMA, context.getPackageName());
     }
 
     public interface IKipoBillingHelperListener {

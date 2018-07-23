@@ -15,7 +15,7 @@ import android.view.View;
  */
 
 @SuppressWarnings({"unused", "DefaultFileTemplate"})
-public class DrawableHelper {
+public class KipoDrawableHelper {
 
     public static Drawable changeColorDrawableVector(Context c, int resDrawable, int color) {
         if (c == null)

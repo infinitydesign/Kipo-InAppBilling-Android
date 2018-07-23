@@ -7,7 +7,7 @@
     <application>
 
         <activity
-            android:name=".activities.BillingActivity"
+            android:name=".activities.KipoBillingActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/BillingAppTheme" />

@@ -9,7 +9,7 @@ import ir.kipo.billing.BuildConfig;
  */
 
 @SuppressWarnings({"unused", "DefaultFileTemplate"})
-public class LogHelper {
+public class KipoLogHelper {
 
     public static final boolean allowLog = BuildConfig.DEBUG;
 

@@ -13,7 +13,7 @@ import android.view.WindowManager;
  */
 
 @SuppressWarnings({"unused", "DefaultFileTemplate"})
-public class DisplayHelper {
+public class KipoDisplayHelper {
 
     public static float dp;
 

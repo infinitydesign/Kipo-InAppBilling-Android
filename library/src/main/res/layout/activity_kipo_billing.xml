@@ -29,8 +29,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ir.kipo.billing.views.HEImageView
-                android:id="@+id/HEImageView_billing_secure"
+            <ir.kipo.billing.views.KipoHEImageView
+                android:id="@+id/HEImageView_kipo_billing_secure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -41,7 +41,7 @@
                 app:he_imageview_size="20dp"
                 app:he_imageview_vector="@drawable/ic_lock_outline" />
 
-            <ir.kipo.billing.views.MyTextView
+            <ir.kipo.billing.views.KipoMyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
@@ -59,8 +59,8 @@
                 android:background="@color/transparent"
                 android:scrollbars="none">
 
-                <ir.kipo.billing.views.MyTextView
-                    android:id="@+id/MyTextView_billing_url"
+                <ir.kipo.billing.views.KipoMyTextView
+                    android:id="@+id/MyTextView_kipo_billing_url"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="1"
@@ -88,12 +88,12 @@
         android:layout_height="match_parent">
 
         <WebView
-            android:id="@+id/WebView_billing"
+            android:id="@+id/WebView_kipo_billing"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <ir.kipo.billing.views.HEProgressBar
-            android:id="@+id/HEProgressBar_billing"
+        <ir.kipo.billing.views.KipoHEProgressBar
+            android:id="@+id/HEProgressBar_kipo_billing"
             style="@style/HEProgressBar.normal.primary" />
 
     </FrameLayout>

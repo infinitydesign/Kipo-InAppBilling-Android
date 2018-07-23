@@ -22,7 +22,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 @SuppressWarnings({"unused", "DefaultFileTemplate"})
-public class StringHelper {
+public class KipoStringHelper {
 
     public static String createStringFromArray(String[] arr) {
         try {
@@ -421,8 +421,8 @@ public class StringHelper {
 
     public static double toDoubleEnglish(String input) {
         try {
-            input = StringHelper.toEnglishNumber(input);
-            return StringHelper.convertDoubleCurrency(input);
+            input = KipoStringHelper.toEnglishNumber(input);
+            return KipoStringHelper.convertDoubleCurrency(input);
         } catch (Exception e) {
             return 0;
         }

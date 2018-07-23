@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  */
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public class SPHelper {
+public class KipoSPHelper {
 
     public static final String SETTING = "MainSetting_v1"; // not clear after update app
 

@@ -13,22 +13,22 @@ import java.net.URI;
 
 import ir.kipo.billing.KipoBillingHelper;
 import ir.kipo.billing.R;
-import ir.kipo.billing.tools.LogHelper;
-import ir.kipo.billing.tools.SPHelper;
-import ir.kipo.billing.tools.StringHelper;
-import ir.kipo.billing.views.HEProgressBar;
-import ir.kipo.billing.views.MyTextView;
+import ir.kipo.billing.tools.KipoLogHelper;
+import ir.kipo.billing.tools.KipoSPHelper;
+import ir.kipo.billing.tools.KipoStringHelper;
+import ir.kipo.billing.views.KipoHEProgressBar;
+import ir.kipo.billing.views.KipoMyTextView;
 
-public class BillingActivity extends AppCompatActivity {
+public class KipoBillingActivity extends AppCompatActivity {
 
-    private static final String TAG = BillingActivity.class.getSimpleName();
+    private static final String TAG = KipoBillingActivity.class.getSimpleName();
 
     public static final String KEY_AMOUNT = "amount";
     private long amount;
 
-    private MyTextView tv_url;
+    private KipoMyTextView tv_url;
     private WebView wv;
-    private HEProgressBar pb;
+    private KipoHEProgressBar pb;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -56,23 +56,23 @@ public class BillingActivity extends AppCompatActivity {
             return;
         }
 
-        long invoiceId = SPHelper.getLong(this, SPHelper.SETTING, SPHelper.KEY_LAST_INVOICE_ID, SPHelper.DEFAULT_INVOICE_ID);
+        long invoiceId = KipoSPHelper.getLong(this, KipoSPHelper.SETTING, KipoSPHelper.KEY_LAST_INVOICE_ID, KipoSPHelper.DEFAULT_INVOICE_ID);
         invoiceId++;
-        final String merchantSchema = SPHelper.getString(BillingActivity.this, SPHelper.SETTING, SPHelper.KEY_MERCHANT_SCHEMA, "");
-        final String merchantId = SPHelper.getString(BillingActivity.this, SPHelper.SETTING, SPHelper.KEY_MERCHANT_ID, "");
+        final String merchantSchema = KipoSPHelper.getString(KipoBillingActivity.this, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_SCHEMA, "");
+        final String merchantId = KipoSPHelper.getString(KipoBillingActivity.this, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_ID, "");
 
-        setContentView(R.layout.activity_billing);
+        setContentView(R.layout.activity_kipo_billing);
 
-        tv_url = findViewById(R.id.MyTextView_billing_url);
-        wv = findViewById(R.id.WebView_billing);
-        pb = findViewById(R.id.HEProgressBar_billing);
+        tv_url = findViewById(R.id.MyTextView_kipo_billing_url);
+        wv = findViewById(R.id.WebView_kipo_billing);
+        pb = findViewById(R.id.HEProgressBar_kipo_billing);
 
         wv.getSettings().setJavaScriptEnabled(true);
         wv.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogHelper.d(TAG, "url : " + url);
+                KipoLogHelper.d(TAG, "url : " + url);
                 URI uri = null;
                 try {
                     uri = new URI(url);
@@ -91,7 +91,7 @@ public class BillingActivity extends AppCompatActivity {
                         if (array.length >= 2) {
                             if (array[1].equals("token")) {
                                 String tokenValue = array[2];
-                                if (StringHelper.isEmpty(tokenValue))
+                                if (KipoStringHelper.isEmpty(tokenValue))
                                     finishActivity(KipoBillingHelper.CODE_FAILED, "", 102);
                                 else
                                     finishActivity(KipoBillingHelper.CODE_SUCCESS, tokenValue, 103);
@@ -138,7 +138,7 @@ public class BillingActivity extends AppCompatActivity {
         if (tv_url == null)
             return;
 
-        if (StringHelper.isEmpty(url)) {
+        if (KipoStringHelper.isEmpty(url)) {
             tv_url.setText("");
             return;
         }

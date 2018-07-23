@@ -6,15 +6,15 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 import ir.kipo.billing.R;
-import ir.kipo.billing.tools.Font;
-import ir.kipo.billing.tools.StringHelper;
+import ir.kipo.billing.tools.KipoFont;
+import ir.kipo.billing.tools.KipoStringHelper;
 
 /**
  * Created by 1HE on 10/22/2017.
  */
 
 @SuppressWarnings("DefaultFileTemplate")
-public class MyTextView extends AppCompatTextView {
+public class KipoMyTextView extends AppCompatTextView {
 
     private String fontName = "";
     private boolean haveStar = false;
@@ -23,41 +23,41 @@ public class MyTextView extends AppCompatTextView {
     private boolean haveSpan;
     private boolean forcePaddingFont;
 
-    public MyTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KipoMyTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setAttributeFromXml(context, attrs);
         initializeViews();
     }
 
-    public MyTextView(Context context, AttributeSet attrs) {
+    public KipoMyTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setAttributeFromXml(context, attrs);
         initializeViews();
     }
 
     private void setAttributeFromXml(Context context, AttributeSet attrs) {
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MyTextView, 0, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.KipoMyTextView, 0, 0);
 
         try {
-            fontName = a.getString(R.styleable.MyTextView_fontName);
-            haveStar = a.getBoolean(R.styleable.MyTextView_haveStar, false);
-            haveDouble = a.getBoolean(R.styleable.MyTextView_haveDouble, false);
-            isPersian = a.getBoolean(R.styleable.MyTextView_isPersian, true);
-            haveSpan = a.getBoolean(R.styleable.MyTextView_haveSpan, false);
-            forcePaddingFont = a.getBoolean(R.styleable.MyTextView_forcePaddingFont, false);
+            fontName = a.getString(R.styleable.KipoMyTextView_fontName);
+            haveStar = a.getBoolean(R.styleable.KipoMyTextView_haveStar, false);
+            haveDouble = a.getBoolean(R.styleable.KipoMyTextView_haveDouble, false);
+            isPersian = a.getBoolean(R.styleable.KipoMyTextView_isPersian, true);
+            haveSpan = a.getBoolean(R.styleable.KipoMyTextView_haveSpan, false);
+            forcePaddingFont = a.getBoolean(R.styleable.KipoMyTextView_forcePaddingFont, false);
         } finally {
             a.recycle();
         }
     }
 
     private void initializeViews() {
-        if (!StringHelper.isEmpty(fontName))
-            setTypeface(Font.getFont(getContext(), fontName));
+        if (!KipoStringHelper.isEmpty(fontName))
+            setTypeface(KipoFont.getFont(getContext(), fontName));
         String result = getText().toString();
         if (haveStar)
-            result = StringHelper.getStarredText(result);
+            result = KipoStringHelper.getStarredText(result);
         if (isPersian)
-            result = StringHelper.toPersianNumber(result);
+            result = KipoStringHelper.toPersianNumber(result);
         setText(result);
 
         setIncludeFontPadding(forcePaddingFont);
@@ -77,11 +77,11 @@ public class MyTextView extends AppCompatTextView {
 
         String result = text.toString();
         if (haveStar)
-            result = StringHelper.getStarredText(result);
+            result = KipoStringHelper.getStarredText(result);
         if (haveDouble)
-            result = StringHelper.getDoubledText(result);
+            result = KipoStringHelper.getDoubledText(result);
         if (isPersian)
-            result = StringHelper.toPersianNumber(result);
+            result = KipoStringHelper.toPersianNumber(result);
         super.setText(result, type);
     }
 

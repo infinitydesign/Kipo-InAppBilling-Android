@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="MyTextView">
+    <declare-styleable name="KipoMyTextView">
         <attr name="fontName" format="string" />
         <attr name="isPersian" format="boolean" />
         <attr name="haveStar" format="boolean" />
@@ -11,7 +11,7 @@
         <attr name="forcePaddingFont" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="HEImageView">
+    <declare-styleable name="KipoHEImageView">
         <attr name="he_imageview_vector" format="reference" />
         <attr name="he_imageview_color" format="color" />
         <attr name="he_imageview_size" format="dimension" />

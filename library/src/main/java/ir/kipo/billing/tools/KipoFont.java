@@ -10,7 +10,7 @@ import ir.kipo.billing.R;
  * Created by 1HE on 06/28/2016.
  */
 @SuppressWarnings("ALL")
-public class Font {
+public class KipoFont {
 
     private static Typeface mainRegular;
     private static Typeface mainBold;
