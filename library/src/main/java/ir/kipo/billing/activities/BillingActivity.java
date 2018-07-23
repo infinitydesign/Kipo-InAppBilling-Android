@@ -58,6 +58,8 @@ public class BillingActivity extends AppCompatActivity {
 
         long invoiceId = SPHelper.getLong(this, SPHelper.SETTING, SPHelper.KEY_LAST_INVOICE_ID, SPHelper.DEFAULT_INVOICE_ID);
         invoiceId++;
+        final String merchantSchema = SPHelper.getString(BillingActivity.this, SPHelper.SETTING, SPHelper.KEY_MERCHANT_SCHEMA, "");
+        final String merchantId = SPHelper.getString(BillingActivity.this, SPHelper.SETTING, SPHelper.KEY_MERCHANT_ID, "");
 
         setContentView(R.layout.activity_billing);
 
@@ -82,7 +84,7 @@ public class BillingActivity extends AppCompatActivity {
                     return false;
                 }
 
-                if (uri.getScheme().startsWith(SPHelper.getString(BillingActivity.this, SPHelper.SETTING, SPHelper.KEY_MERCHANT_SCHEMA, ""))) {
+                if (uri.getScheme().startsWith(merchantSchema)) {
                     if (uri.getHost().equals("app")) {
                         String path = uri.getPath();
                         String[] array = path.split("/");
@@ -96,7 +98,9 @@ public class BillingActivity extends AppCompatActivity {
 
                             } else if (array[1].equals("error")) {
                                 String message = array[2];
+                                message = message.replaceAll("[+]", " ");
                                 finishActivity(KipoBillingHelper.CODE_FAILED, message, 0);
+
                             } else {
                                 finishActivity(KipoBillingHelper.CODE_FAILED, "", 105);
                             }
@@ -125,7 +129,9 @@ public class BillingActivity extends AppCompatActivity {
                 setUrl(url);
             }
         });
-        wv.loadUrl("http://he.idco.io/my_files/main.html");
+
+        String url = "http://iap.kipopay.com/?bi=" + merchantSchema + "&in=" + invoiceId + "&a=" + amount + "&mp=" + merchantId + "&os=android";
+        wv.loadUrl(url);
     }
 
     private void setUrl(String url) {
