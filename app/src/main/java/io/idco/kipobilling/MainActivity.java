@@ -10,7 +10,7 @@ import ir.kipo.billing.KipoBillingHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    KipoBillingHelper helper;
+    private KipoBillingHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,6 @@ public class MainActivity extends AppCompatActivity {
             public void onBillingFailed(String message) {
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
-
-            @Override
-            public void onBillingCanceled() {
-                Toast.makeText(MainActivity.this, "کاربر از خرید انصراف داد", Toast.LENGTH_LONG).show();
-            }
         });
 
         findViewById(R.id.Button_main).setOnClickListener(new View.OnClickListener() {
@@ -45,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        helper.onActivityResult(requestCode, resultCode, data);
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        helper.onNewIntent(intent);
     }
 }

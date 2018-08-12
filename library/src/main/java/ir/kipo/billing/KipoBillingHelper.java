@@ -3,23 +3,18 @@ package ir.kipo.billing;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
-import ir.kipo.billing.activities.KipoBillingActivity;
 import ir.kipo.billing.tools.KipoSPHelper;
 import ir.kipo.billing.tools.KipoStringHelper;
 
 public class KipoBillingHelper {
 
-    public static final int CODE_SUCCESS = 1;
-    public static final int CODE_FAILED = 2;
-    public static final int CODE_CANCELED = 3;
-
-    public static final String RESULT_CODE = "code";
-    public static final String RESULT_TOKEN = "token";
-    public static final String RESULT_MESSAGE = "message";
-    public static final String RESULT_ERROR_CODE = "errorCode";
-
-    public static final int REQUEST_CODE = 3005;
+    private static final int CODE_SUCCESS = 1;
+    private static final int CODE_FAILED = 2;
 
     private Activity activity;
     private IKipoBillingHelperListener listener;
@@ -39,37 +34,89 @@ public class KipoBillingHelper {
     }
 
     public void purchase(long amount) {
-        Intent intent = new Intent(activity, KipoBillingActivity.class);
-        intent.putExtra(KipoBillingActivity.KEY_AMOUNT, amount);
-        activity.startActivityForResult(intent, REQUEST_CODE);
+        if (amount <= 0) {
+            Toast.makeText(activity, R.string.error_needAmount, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        long invoiceId = KipoSPHelper.getLong(activity, KipoSPHelper.SETTING, KipoSPHelper.KEY_LAST_INVOICE_ID, KipoSPHelper.DEFAULT_INVOICE_ID);
+        invoiceId++;
+        String merchantSchema = KipoSPHelper.getString(activity, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_SCHEMA, "");
+        String merchantId = KipoSPHelper.getString(activity, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_ID, "");
+
+        String url = "http://iap.kipopay.com/?bi=" + merchantSchema + "&in=" + invoiceId + "&a=" + amount + "&mp=" + merchantId + "&os=android";
+
+        try {
+            CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+
+            intentBuilder.setToolbarColor(ContextCompat.getColor(activity, R.color.toolbarBackground));
+            intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(activity, R.color.toolbarBackground));
+
+            CustomTabsIntent customTabsIntent = intentBuilder.build();
+            customTabsIntent.launchUrl(activity, Uri.parse(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                activity.startActivity(i);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQUEST_CODE || resultCode != Activity.RESULT_OK)
+    public void onNewIntent(Intent data) {
+        if (data == null)
             return;
 
-        if (data == null) {
-            String m = String.format(activity.getString(R.string.errorCode), 99);
-            m = defaultMessage + " " + m;
-            listener.onBillingFailed(m);
-            return;
-        }
-
-        int code = data.getIntExtra(RESULT_CODE, CODE_FAILED);
-        String message = data.getStringExtra(RESULT_MESSAGE);
-        String token = data.getStringExtra(RESULT_TOKEN);
-        int errorCode = data.getIntExtra(RESULT_ERROR_CODE, 100);
-
-        if (code == CODE_CANCELED) {
-            listener.onBillingCanceled();
+        Uri uri = data.getData();
+        if (uri == null || uri.getScheme() == null) {
+            callListener(KipoBillingHelper.CODE_FAILED, "", 101);
             return;
         }
+
+        String merchantSchema = KipoSPHelper.getString(activity, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_SCHEMA, "");
+
+        if (uri.getScheme().startsWith(merchantSchema)) {
+            if (uri.getHost().equals("app")) {
+                String path = uri.getPath();
+                String[] array = path.split("/");
+                if (array.length >= 2) {
+                    if (array[1].equals("token")) {
+                        String tokenValue = array[2];
+                        if (KipoStringHelper.isEmpty(tokenValue))
+                            callListener(KipoBillingHelper.CODE_FAILED, "", 102);
+                        else
+                            callListener(KipoBillingHelper.CODE_SUCCESS, tokenValue, 103);
+
+                    } else if (array[1].equals("error")) {
+                        String message = array[2];
+                        message = message.replaceAll("[+]", " ");
+                        callListener(KipoBillingHelper.CODE_FAILED, message, 0);
+
+                    } else {
+                        callListener(KipoBillingHelper.CODE_FAILED, "", 105);
+                    }
+                } else {
+                    callListener(KipoBillingHelper.CODE_FAILED, "", 106);
+                }
+            }
+        }
+    }
+
+    private void callListener(int code, String m, int errorCode) {
+        String message = "";
+        String token = "";
+        if (code == KipoBillingHelper.CODE_SUCCESS)
+            token = m;
+        else
+            message = m;
 
         if (code == CODE_FAILED) {
-            String m = KipoStringHelper.isEmpty(message) ? defaultMessage : message;
+            String ms = KipoStringHelper.isEmpty(message) ? defaultMessage : message;
             if (errorCode != 0)
-                m += " " + String.format(activity.getString(R.string.errorCode), errorCode);
-            listener.onBillingFailed(m);
+                ms += " " + String.format(activity.getString(R.string.errorCode), errorCode);
+            listener.onBillingFailed(ms);
             return;
         }
 
@@ -91,8 +138,6 @@ public class KipoBillingHelper {
         void onBillingReadyForCheckingToken(String token);
 
         void onBillingFailed(String message);
-
-        void onBillingCanceled();
 
     }
 

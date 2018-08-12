@@ -4,14 +4,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application>
-
-        <activity
-            android:name=".activities.KipoBillingActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/BillingAppTheme" />
-
-    </application>
+    <application />
 
 </manifest>
