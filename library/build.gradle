@@ -23,24 +23,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-}
-
-// Add a new configuration to hold your dependencies
-configurations {
-    myConfig
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
-    myConfig 'com.android.support:appcompat-v7:27.1.1'
-    myConfig 'com.android.support:customtabs:27.1.1'
-}
-
-task copyLibs(type: Copy) {
-    from configurations.myConfig
-    into "libs"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:customtabs:27.1.1'
 }
 
 apply plugin: 'com.jfrog.artifactory'
