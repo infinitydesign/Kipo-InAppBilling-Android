@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 def libraryGroupId = 'ir.kipo'
 def libraryArtifactId = 'inAppBilling'
-def libraryVersion = '1.0.4'
+def libraryVersion = '1.1.0'
 
 android {
     compileSdkVersion 27
@@ -25,9 +25,22 @@ android {
     }
 }
 
+configurations {
+    myConfig
+}
+
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:customtabs:27.1.1'
+
+    myConfig fileTree(dir: 'libs', include: ['*.jar'])
+    myConfig 'com.android.support:appcompat-v7:27.1.1'
+    myConfig 'com.android.support:customtabs:27.1.1'
+}
+
+task copyLibs(type: Copy) {
+    from configurations.myConfig
+    into 'libs'
 }
 
 apply plugin: 'com.jfrog.artifactory'
