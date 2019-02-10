@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 def libraryGroupId = 'ir.kipo'
 def libraryArtifactId = 'inAppBilling'
-def libraryVersion = '1.1.0'
+def libraryVersion = '1.2.0'
 
 android {
     compileSdkVersion 27

@@ -9,6 +9,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        KipoBillingHelper.init(this, "09132686267");
+        KipoBillingHelper.init(this, "09082001061");
     }
 }

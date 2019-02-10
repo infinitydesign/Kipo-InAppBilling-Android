@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import ir.kipo.billing.tools.KipoSPHelper;
@@ -77,30 +78,36 @@ public class KipoBillingHelper {
 
         String merchantSchema = KipoSPHelper.getString(activity, KipoSPHelper.SETTING, KipoSPHelper.KEY_MERCHANT_SCHEMA, "");
 
-        if (uri.getScheme().startsWith(merchantSchema)) {
-            if (uri.getHost().equals("app")) {
-                String path = uri.getPath();
-                String[] array = path.split("/");
-                if (array.length >= 2) {
-                    if (array[1].equals("token")) {
-                        String tokenValue = array[2];
-                        if (KipoStringHelper.isEmpty(tokenValue))
-                            callListener(KipoBillingHelper.CODE_FAILED, "", 102);
-                        else
-                            callListener(KipoBillingHelper.CODE_SUCCESS, tokenValue, 103);
+        try {
+            if (uri.getScheme().startsWith(merchantSchema)) {
+                Log.d("sssssssss", uri.toString());
+                if (uri.getHost().equals("app")) {
+                    String path = uri.getPath();
+                    String[] array = path.split("/");
+                    if (array.length >= 3) {
+                        if (array[1].equals("token")) {
+                            String tokenValue = array[2];
+                            if (KipoStringHelper.isEmpty(tokenValue))
+                                callListener(KipoBillingHelper.CODE_FAILED, "", 102);
+                            else
+                                callListener(KipoBillingHelper.CODE_SUCCESS, tokenValue, 103);
 
-                    } else if (array[1].equals("error")) {
-                        String message = array[2];
-                        message = message.replaceAll("[+]", " ");
-                        callListener(KipoBillingHelper.CODE_FAILED, message, 0);
+                        } else if (array[1].equals("error")) {
+                            String message = array[2];
+                            message = message.replaceAll("[+]", " ");
+                            callListener(KipoBillingHelper.CODE_FAILED, message, 0);
 
+                        } else {
+                            callListener(KipoBillingHelper.CODE_FAILED, "", 105);
+                        }
                     } else {
-                        callListener(KipoBillingHelper.CODE_FAILED, "", 105);
+                        callListener(KipoBillingHelper.CODE_FAILED, "", 106);
                     }
-                } else {
-                    callListener(KipoBillingHelper.CODE_FAILED, "", 106);
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            callListener(KipoBillingHelper.CODE_FAILED, "", 107);
         }
     }
 
