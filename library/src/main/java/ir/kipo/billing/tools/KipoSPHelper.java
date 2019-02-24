@@ -16,7 +16,7 @@ public class KipoSPHelper {
     public static final String KEY_MERCHANT_SCHEMA = "merchant_schema";
     public static final String KEY_LAST_INVOICE_ID = "last_invoiceId";
 
-    public static final long DEFAULT_INVOICE_ID = 10000;
+    public static final long DEFAULT_INVOICE_ID = 100000;
 
     @SuppressWarnings("unused")
     public static boolean getBoolean(Context c, String settingName, String key, boolean def) {

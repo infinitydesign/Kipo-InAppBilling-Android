@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import ir.kipo.billing.tools.KipoSPHelper;
@@ -48,13 +45,16 @@ public class KipoBillingHelper {
         String url = "http://iap.kipopay.com/?bi=" + merchantSchema + "&in=" + invoiceId + "&a=" + amount + "&mp=" + merchantId + "&os=android";
 
         try {
-            CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+//            CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+//
+//            intentBuilder.setToolbarColor(ContextCompat.getColor(activity, R.color.toolbarBackground));
+//            intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(activity, R.color.toolbarBackground));
+//
+//            CustomTabsIntent customTabsIntent = intentBuilder.build();
+//            customTabsIntent.launchUrl(activity, Uri.parse(url));
 
-            intentBuilder.setToolbarColor(ContextCompat.getColor(activity, R.color.toolbarBackground));
-            intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(activity, R.color.toolbarBackground));
-
-            CustomTabsIntent customTabsIntent = intentBuilder.build();
-            customTabsIntent.launchUrl(activity, Uri.parse(url));
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            activity.startActivity(i);
         } catch (Exception e) {
             e.printStackTrace();
             try {
@@ -80,7 +80,6 @@ public class KipoBillingHelper {
 
         try {
             if (uri.getScheme().startsWith(merchantSchema)) {
-                Log.d("sssssssss", uri.toString());
                 if (uri.getHost().equals("app")) {
                     String path = uri.getPath();
                     String[] array = path.split("/");
